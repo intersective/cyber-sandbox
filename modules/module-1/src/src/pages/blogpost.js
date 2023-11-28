@@ -5,9 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import Page from '../components/Page';
 import Iconify from '../components/Iconify';
 import { getUser } from '../sections/auth/AuthService';
-import awsLogoNew from '../images/aws.jpg';
+import logoNew from '../images/logo-new.jpg';
 import httpService from '../common/httpService';
-import awsLogoWithName from '../images/aws-wname.jpg';
+import logoWithName from '../images/logo-title.jpg';
 
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
@@ -80,7 +80,7 @@ export default function Blogpost() {
     <Page title="Blogs">
       <Stack direction="row" justifyContent="space-between" sx={{ backgroundColor: 'black' }}>
         <Stack direction="row" justifyContent="flex-start">
-          <Link component={RouterLink} variant="subtitle2" to="/home" underline="hover"><img src={awsLogoNew} alt="" width="150px" /></Link>
+          <Link component={RouterLink} variant="subtitle2" to="/home" underline="hover"><img src={logoNew} alt="" width="150px" /></Link>
         </Stack>
         <Stack direction="row" justifyContent="flex-end" alignItems="center" sx={{ paddingRight: 2 }}>
           {loggenInAuthLevel === "0" && (<><Button
@@ -140,7 +140,7 @@ export default function Blogpost() {
         </Card>
       </Container>
       <Stack direction="row" justifyContent="center" alignContent="center" sx={{ backgroundColor: 'black' }}>
-        <img src={awsLogoWithName} alt="" width="200px" />
+        <img src={logoWithName} alt="" width="200px" />
       </Stack>
       <Snackbar open={success} autoHideDuration={4000} onClose={handleClose} message={message} />
     </Page>

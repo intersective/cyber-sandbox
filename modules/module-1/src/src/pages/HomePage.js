@@ -6,9 +6,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import SearchNotFound from '../components/SearchNotFound';
 import HomepageAccountPopover from '../layouts/dashboard/HomepageAccountPopover';
 import Page from '../components/Page';
-import awsLogo from '../images/AWScloudtitle.jpg';
-import awsLogoNew from '../images/aws.jpg';
-import awsLogoWithName from '../images/aws-wname.jpg';
+import logo from '../images/logo.jpg';
+import logoNew from '../images/logo-new.jpg';
+import logoWithName from '../images/logo-title.jpg';
 
 import './App.css';
 import httpService from '../common/httpService';
@@ -87,11 +87,11 @@ function HomePage() {
       <Page title="Homepage">
         <Stack direction="row" justifyContent="space-between" sx={{ backgroundColor: 'black' }}>
           <Stack direction="row" justifyContent="flex-start">
-            <img src={awsLogoNew} alt="" width="150px" />
+            <img src={logoNew} alt="" width="150px" />
           </Stack>
           <Stack direction="row" justifyContent="center" alignItems="center" sx={{ marginLeft: 25 }}>
-            {/* <Typography variant="h2" color="white">AWS Goat</Typography> */}
-            <img src={awsLogo} alt="" width="300px" />
+            {/* <Typography variant="h2" color="white">Cyber Trainer</Typography> */}
+            <img src={logo} alt="" width="300px" />
           </Stack>
           <Stack direction="row" justifyContent="flex-end" alignItems="center" sx={{ paddingRight: 2 }}>
             <Search sx={{ height: '40px', marginRight: 10 }}>
@@ -148,7 +148,7 @@ function HomePage() {
         </div>
         <Stack direction="column" alignSelf="flex-end">
           <Stack direction="row" justifyContent="center" sx={{ backgroundColor: 'black' }}>
-            <img src={awsLogoWithName} alt="" width="200px" />
+            <img src={logoWithName} alt="" width="200px" />
           </Stack>
         </Stack>
       </Page>
