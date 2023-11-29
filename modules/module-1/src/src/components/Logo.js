@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 // @mui
 // import { useTheme } from '@mui/material/styles';
 import { Box } from '@mui/material';
-import mainLogo from '../images/aws-wname.jpg';
+import mainLogo from '../images/logo.jpg';
 
 // ----------------------------------------------------------------------
 
