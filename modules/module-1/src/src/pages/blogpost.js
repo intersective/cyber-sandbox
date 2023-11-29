@@ -5,9 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import Page from '../components/Page';
 import Iconify from '../components/Iconify';
 import { getUser } from '../sections/auth/AuthService';
-import logoNew from '../images/logo-new.jpg';
+import logoNew from '../images/logo-new.png';
 import httpService from '../common/httpService';
-import logoWithName from '../images/logo-title.jpg';
+import logoWithName from '../images/logo-title.png';
 
 const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 

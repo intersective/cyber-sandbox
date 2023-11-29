@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/static/css/main.54e3607f.css",
-    "main.js": "/static/js/main.e5839717.js",
+    "main.css": "/static/css/main.ec953734.css",
+    "main.js": "/static/js/main.6c4b3723.js",
     "static/js/787.8c65ad62.chunk.js": "/static/js/787.8c65ad62.chunk.js",
-    "static/media/aws.jpg": "/static/media/aws.7f8d469729dd2de6cfb3.jpg",
-    "static/media/aws-wname.jpg": "/static/media/aws-wname.ca2376115332eb5057e8.jpg",
+    "static/media/logo-new.png": "/static/media/logo-new.becf4a697a3121a3e22e.png",
+    "static/media/logo.png": "/static/media/logo.becf4a697a3121a3e22e.png",
+    "static/media/logo-title.png": "/static/media/logo-title.1f17751ae86b353b8d94.png",
     "static/media/login.jpg": "/static/media/login.e21739546d37920dcfe5.jpg",
-    "static/media/AWScloudtitle.jpg": "/static/media/AWScloudtitle.98cddcd1f55ecb7dbf64.jpg",
     "static/media/reset-password.jpg": "/static/media/reset-password.534bb9d0d1f845e91b10.jpg",
     "static/media/no-posts-found.jpg": "/static/media/no-posts-found.a48ad7ab109b12f96751.jpg",
     "static/media/register.jpg": "/static/media/register.4206b16c0ce018f0307d.jpg",
     "index.html": "/index.html",
-    "main.54e3607f.css.map": "/static/css/main.54e3607f.css.map",
-    "main.e5839717.js.map": "/static/js/main.e5839717.js.map",
+    "main.ec953734.css.map": "/static/css/main.ec953734.css.map",
+    "main.6c4b3723.js.map": "/static/js/main.6c4b3723.js.map",
     "787.8c65ad62.chunk.js.map": "/static/js/787.8c65ad62.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.54e3607f.css",
-    "static/js/main.e5839717.js"
+    "static/css/main.ec953734.css",
+    "static/js/main.6c4b3723.js"
   ]
 }

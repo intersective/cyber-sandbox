@@ -6,9 +6,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import SearchNotFound from '../components/SearchNotFound';
 import HomepageAccountPopover from '../layouts/dashboard/HomepageAccountPopover';
 import Page from '../components/Page';
-import logo from '../images/logo.jpg';
-import logoNew from '../images/logo-new.jpg';
-import logoWithName from '../images/logo-title.jpg';
+import logo from '../images/logo.png';
+import logoNew from '../images/logo-new.png';
+import logoWithName from '../images/logo-title.png';
 
 import './App.css';
 import httpService from '../common/httpService';
