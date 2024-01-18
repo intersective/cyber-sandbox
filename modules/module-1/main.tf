@@ -3192,7 +3192,7 @@ locals {
 
 /* Creating a S3 Bucket for webfiles files upload. */
 resource "aws_s3_bucket" "bucket_upload" {
-  bucket        = "production-blog-awsgoat-bucket-${data.aws_caller_identity.current.account_id}"
+  bucket        = "production-blog-hackicorp-bucket-${data.aws_caller_identity.current.account_id}"
   force_destroy = true
   tags = {
     Name        = "Production bucket"
@@ -3275,7 +3275,7 @@ resource "aws_s3_bucket_object" "upload_folder_prod" {
 
 #Development bucket
 resource "aws_s3_bucket" "dev" {
-  bucket = "dev-blog-awsgoat-bucket-${data.aws_caller_identity.current.account_id}"
+  bucket = "dev-blog-hackicorp-bucket-${data.aws_caller_identity.current.account_id}"
 
   tags = {
     Name        = "Development bucket"
@@ -3410,7 +3410,7 @@ resource "aws_s3_bucket_object" "upload_temp_object_2" {
 
 /* Creating a S3 Bucket for Terraform state file upload. */
 resource "aws_s3_bucket" "bucket_tf_files" {
-  bucket        = "do-not-delete-awsgoat-state-files-${data.aws_caller_identity.current.account_id}"
+  bucket        = "do-not-delete-hackicorp-state-files-${data.aws_caller_identity.current.account_id}"
   force_destroy = true
   tags = {
     Name        = "Do not delete Bucket"
@@ -3421,46 +3421,46 @@ resource "aws_s3_bucket" "bucket_tf_files" {
 
 # VPC to deploy web app
 
-resource "aws_vpc" "goat_vpc" {
+resource "aws_vpc" "sandbox_vpc" {
   cidr_block           = "192.168.0.0/16"
   instance_tenancy     = "default"
   enable_dns_hostnames = true
   tags = {
-    Name = "AWS_GOAT_VPC"
+    Name = "AWS_SANDBOX_VPC"
   }
 }
-resource "aws_internet_gateway" "goat_gw" {
-  vpc_id = aws_vpc.goat_vpc.id
+resource "aws_internet_gateway" "sandbox_gw" {
+  vpc_id = aws_vpc.sandbox_vpc.id
   tags = {
     Name = "app gateway"
   }
 }
-resource "aws_subnet" "goat_subnet" {
-  vpc_id                  = aws_vpc.goat_vpc.id
+resource "aws_subnet" "sandbox_subnet" {
+  vpc_id                  = aws_vpc.sandbox_vpc.id
   cidr_block              = "192.168.0.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
   tags = {
-    Name = "AWS_GOAT App subnet"
+    Name = "AWS_SANDBOX App subnet"
   }
 }
 
-resource "aws_route_table" "goat_rt" {
-  vpc_id = aws_vpc.goat_vpc.id
+resource "aws_route_table" "sandbox_rt" {
+  vpc_id = aws_vpc.sandbox_vpc.id
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.goat_gw.id
+    gateway_id = aws_internet_gateway.sandbox_gw.id
   }
 }
-resource "aws_route_table_association" "goat_public_rta" {
-  subnet_id      = aws_subnet.goat_subnet.id
-  route_table_id = aws_route_table.goat_rt.id
+resource "aws_route_table_association" "sandbox_public_rta" {
+  subnet_id      = aws_subnet.sandbox_subnet.id
+  route_table_id = aws_route_table.sandbox_rt.id
 }
 
-resource "aws_security_group" "goat_sg" {
-  name        = "AWS_GOAT_sg"
-  description = "AWS_GOAT_sg"
-  vpc_id      = aws_vpc.goat_vpc.id
+resource "aws_security_group" "sandbox_sg" {
+  name        = "AWS_SANDBOX_sg"
+  description = "AWS_SANDBOX_sg"
+  vpc_id      = aws_vpc.sandbox_vpc.id
   ingress {
     from_port   = 22
     to_port     = 22
@@ -3475,18 +3475,18 @@ resource "aws_security_group" "goat_sg" {
   }
 
   tags = {
-    Name = "AWS_GOAT_sg"
+    Name = "AWS_SANDBOX_sg"
   }
 }
 
 
 # Instance Requirements
-resource "aws_iam_instance_profile" "goat_iam_profile" {
-  name = "AWS_GOAT_ec2_profile"
-  role = aws_iam_role.goat_role.name
+resource "aws_iam_instance_profile" "sandbox_iam_profile" {
+  name = "AWS_SANDBOX_ec2_profile"
+  role = aws_iam_role.sandbox_role.name
 }
-resource "aws_iam_role" "goat_role" {
-  name               = "AWS_GOAT_ROLE"
+resource "aws_iam_role" "sandbox_role" {
+  name               = "AWS_SANDBOX_ROLE"
   path               = "/"
   assume_role_policy = <<EOF
 {
@@ -3504,18 +3504,18 @@ resource "aws_iam_role" "goat_role" {
 }
 EOF
 }
-resource "aws_iam_role_policy_attachment" "goat_s3_policy" {
-  role       = aws_iam_role.goat_role.name
+resource "aws_iam_role_policy_attachment" "sandbox_s3_policy" {
+  role       = aws_iam_role.sandbox_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
 
 
-resource "aws_iam_role_policy_attachment" "goat_policy" {
-  role       = aws_iam_role.goat_role.name
-  policy_arn = aws_iam_policy.goat_inline_policy_2.arn
+resource "aws_iam_role_policy_attachment" "sandbox_policy" {
+  role       = aws_iam_role.sandbox_role.name
+  policy_arn = aws_iam_policy.sandbox_inline_policy_2.arn
 }
 
-resource "aws_iam_policy" "goat_inline_policy_2" {
+resource "aws_iam_policy" "sandbox_inline_policy_2" {
   name = "dev-ec2-lambda-policies"
   policy = jsonencode({
     "Statement" : [
@@ -3567,8 +3567,8 @@ resource "aws_iam_policy" "goat_inline_policy_2" {
   })
 }
 
-data "template_file" "goat_script" {
-  template = file("resources/ec2/goat_user_data.tpl")
+data "template_file" "sandbox_script" {
+  template = file("resources/ec2/sandbox_user_data.tpl")
   vars = {
     S3_BUCKET_NAME = aws_s3_bucket.bucket_temp.bucket
   }
@@ -3576,7 +3576,7 @@ data "template_file" "goat_script" {
 }
 
 
-data "aws_ami" "goat_ami" {
+data "aws_ami" "sandbox_ami" {
   most_recent = true
   filter {
     name   = "name"
@@ -3589,16 +3589,16 @@ data "aws_ami" "goat_ami" {
   owners = ["amazon"]
 }
 
-resource "aws_instance" "goat_instance" {
-  ami                  = data.aws_ami.goat_ami.id
+resource "aws_instance" "sandbox_instance" {
+  ami                  = data.aws_ami.sandbox_ami.id
   instance_type        = "t2.micro"
-  iam_instance_profile = aws_iam_instance_profile.goat_iam_profile.name
-  subnet_id            = aws_subnet.goat_subnet.id
-  security_groups      = [aws_security_group.goat_sg.id]
+  iam_instance_profile = aws_iam_instance_profile.sandbox_iam_profile.name
+  subnet_id            = aws_subnet.sandbox_subnet.id
+  security_groups      = [aws_security_group.sandbox_sg.id]
   tags = {
-    Name = "AWS_GOAT_DEV_INSTANCE"
+    Name = "AWS_SANDBOX_DEV_INSTANCE"
   }
-  user_data = data.template_file.goat_script.rendered
+  user_data = data.template_file.sandbox_script.rendered
   depends_on = [
     aws_s3_bucket_object.upload_temp_object_2
   ]
@@ -3646,10 +3646,10 @@ EOF
 # To replace with IP Address of EC2-Instance in .ssh/config
 resource "null_resource" "file_replacement_ec2_ip" {
   provisioner "local-exec" {
-    command     = "sed -i 's/EC2_IP_ADDR/${aws_instance.goat_instance.public_ip}/g' resources/s3/shared/shared/files/.ssh/config.txt"
+    command     = "sed -i 's/EC2_IP_ADDR/${aws_instance.sandbox_instance.public_ip}/g' resources/s3/shared/shared/files/.ssh/config.txt"
     interpreter = ["/bin/bash", "-c"]
   }
-  depends_on = [aws_instance.goat_instance]
+  depends_on = [aws_instance.sandbox_instance]
 }
 
 
@@ -3695,7 +3695,7 @@ resource "null_resource" "file_replacement_api_gw_cleanup" {
     command     = <<EOF
 sed -i "s,${aws_api_gateway_deployment.apideploy_ba.invoke_url},API_GATEWAY_URL,g" resources/s3/webfiles/build/static/js/main.6c4b3723.js
 sed -i "s,${aws_api_gateway_deployment.apideploy_ba.invoke_url},API_GATEWAY_URL,g" resources/s3/webfiles/build/static/js/main.6c4b3723.js.map
-sed -i 's/${aws_instance.goat_instance.public_ip}/EC2_IP_ADDR/g' resources/s3/shared/shared/files/.ssh/config.txt
+sed -i 's/${aws_instance.sandbox_instance.public_ip}/EC2_IP_ADDR/g' resources/s3/shared/shared/files/.ssh/config.txt
 EOF
     interpreter = ["/bin/bash", "-c"]
   }

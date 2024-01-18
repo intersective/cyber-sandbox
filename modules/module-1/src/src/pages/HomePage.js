@@ -6,8 +6,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import SearchNotFound from '../components/SearchNotFound';
 import HomepageAccountPopover from '../layouts/dashboard/HomepageAccountPopover';
 import Page from '../components/Page';
-import logo from '../images/logo.png';
-import logoNew from '../images/logo-new.png';
+import logoIcon from '../images/logo.png';
+import logoTitle from '../images/logo-title.png';
 import logoWithName from '../images/logo-title.png';
 
 import './App.css';
@@ -87,11 +87,11 @@ function HomePage() {
       <Page title="Homepage">
         <Stack direction="row" justifyContent="space-between" sx={{ backgroundColor: 'black' }}>
           <Stack direction="row" justifyContent="flex-start">
-            <img src={logoNew} alt="" width="150px" />
+            <img src={logoIcon} alt="" width="150px" />
           </Stack>
           <Stack direction="row" justifyContent="center" alignItems="center" sx={{ marginLeft: 25 }}>
             {/* <Typography variant="h2" color="white">Cyber Trainer</Typography> */}
-            <img src={logo} alt="" width="300px" />
+            <img src={logoTitle} alt="" width="300px" />
           </Stack>
           <Stack direction="row" justifyContent="flex-end" alignItems="center" sx={{ paddingRight: 2 }}>
             <Search sx={{ height: '40px', marginRight: 10 }}>
