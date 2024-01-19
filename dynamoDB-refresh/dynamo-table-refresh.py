@@ -39,8 +39,8 @@ def restore_dynamodb_tables():
             # Delete all existing items in the table
             delete_all_items(table, config["primary_key"])
 
-            # Restore from JSON file in the ./dynamoDB-refresh directory
-            file_path = os.path.join(script_directory, 'dynamoDB-refresh', f'{config["table_name"]}.json')
+            # Restore from JSON file in the ../dynamoDB-refresh directory
+            file_path = os.path.join(script_directory, '..', 'dynamoDB-refresh', f'{config["table_name"]}.json')
             with open(file_path) as db_file_json:
                 db_file = json.load(db_file_json)
 
