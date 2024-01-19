@@ -25,7 +25,7 @@ jobs:
 
       - name: Run DynamoDB Refresh
         run: |
-          sed -i 's/replace-bucket-name/${{ secrets.S3BUCKET }}/g' resources/dynamodb/blog-posts.json
+          sed -i 's/replace-bucket-name/${{ secrets.S3BUCKET }}/g' dynamoDB-refresh/blog-posts.json
           python dynamoDB-refresh/dynamo-table-refresh.py
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DYNAMODB_ACCESS_KEY }}
