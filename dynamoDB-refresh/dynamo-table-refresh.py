@@ -33,11 +33,14 @@ def restore_dynamodb_tables():
                 print(f"Table {config['table_name']} does not exist.")
                 continue
 
+            # Get the directory of the script
+            script_directory = os.path.dirname(os.path.abspath(__file__))
+
             # Delete all existing items in the table
             delete_all_items(table, config["primary_key"])
 
             # Restore from JSON file
-            file_path = os.path.join(os.getcwd(), f'{config["table_name"]}.json')
+            file_path = os.path.join(script_directory, 'dynamoDB-refresh', f'{config["table_name"]}.json')
             with open(file_path) as db_file_json:
                 db_file = json.load(db_file_json)
 
