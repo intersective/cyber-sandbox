@@ -25,7 +25,7 @@ jobs:
 
       - name: Run DynamoDB Refresh
         run: |
-          python dynamo-table-refresh.py
+          python dynamoDB-refresh/dynamo-table-refresh.py
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DYNAMODB_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DYNAMODB_SECRET_KEY }}
