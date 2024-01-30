@@ -3589,20 +3589,20 @@ data "aws_ami" "sandbox_ami" {
   owners = ["amazon"]
 }
 
-resource "aws_instance" "sandbox_instance" {
-  ami                  = data.aws_ami.sandbox_ami.id
-  instance_type        = "t2.micro"
-  iam_instance_profile = aws_iam_instance_profile.sandbox_iam_profile.name
-  subnet_id            = aws_subnet.sandbox_subnet.id
-  security_groups      = [aws_security_group.sandbox_sg.id]
-  tags = {
-    Name = "AWS_SANDBOX_DEV_INSTANCE"
-  }
-  user_data = data.template_file.sandbox_script.rendered
-  depends_on = [
-    aws_s3_bucket_object.upload_temp_object_2
-  ]
-}
+# resource "aws_instance" "sandbox_instance" {
+#   ami                  = data.aws_ami.sandbox_ami.id
+#   instance_type        = "t2.micro"
+#   iam_instance_profile = aws_iam_instance_profile.sandbox_iam_profile.name
+#   subnet_id            = aws_subnet.sandbox_subnet.id
+#   security_groups      = [aws_security_group.sandbox_sg.id]
+#   tags = {
+#     Name = "AWS_SANDBOX_DEV_INSTANCE"
+#   }
+#   user_data = data.template_file.sandbox_script.rendered
+#   depends_on = [
+#     aws_s3_bucket_object.upload_temp_object_2
+#   ]
+# }
 
 
 resource "aws_dynamodb_table" "users_table" {
