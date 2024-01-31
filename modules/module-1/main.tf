@@ -3589,20 +3589,20 @@ data "aws_ami" "sandbox_ami" {
   owners = ["amazon"]
 }
 
-resource "aws_instance" "sandbox_instance" {
-  ami                  = data.aws_ami.sandbox_ami.id
-  instance_type        = "t2.micro"
-  iam_instance_profile = aws_iam_instance_profile.sandbox_iam_profile.name
-  subnet_id            = aws_subnet.sandbox_subnet.id
-  security_groups      = [aws_security_group.sandbox_sg.id]
-  tags = {
-    Name = "AWS_SANDBOX_DEV_INSTANCE"
-  }
-  user_data = data.template_file.sandbox_script.rendered
-  depends_on = [
-    aws_s3_bucket_object.upload_temp_object_2
-  ]
-}
+# resource "aws_instance" "sandbox_instance" {
+#   ami                  = data.aws_ami.sandbox_ami.id
+#   instance_type        = "t2.micro"
+#   iam_instance_profile = aws_iam_instance_profile.sandbox_iam_profile.name
+#   subnet_id            = aws_subnet.sandbox_subnet.id
+#   security_groups      = [aws_security_group.sandbox_sg.id]
+#   tags = {
+#     Name = "AWS_SANDBOX_DEV_INSTANCE"
+#   }
+#   user_data = data.template_file.sandbox_script.rendered
+#   depends_on = [
+#     aws_s3_bucket_object.upload_temp_object_2
+#   ]
+# }
 
 
 resource "aws_dynamodb_table" "users_table" {
@@ -3644,13 +3644,13 @@ EOF
 
 
 # To replace with IP Address of EC2-Instance in .ssh/config
-resource "null_resource" "file_replacement_ec2_ip" {
-  provisioner "local-exec" {
-    command     = "sed -i 's/EC2_IP_ADDR/${aws_instance.sandbox_instance.public_ip}/g' resources/s3/shared/shared/files/.ssh/config.txt"
-    interpreter = ["/bin/bash", "-c"]
-  }
-  depends_on = [aws_instance.sandbox_instance]
-}
+# resource "null_resource" "file_replacement_ec2_ip" {
+#   provisioner "local-exec" {
+#     command     = "sed -i 's/EC2_IP_ADDR/${aws_instance.sandbox_instance.public_ip}/g' resources/s3/shared/shared/files/.ssh/config.txt"
+#     interpreter = ["/bin/bash", "-c"]
+#   }
+#   depends_on = [aws_instance.sandbox_instance]
+# }
 
 
 resource "null_resource" "file_replacement_lambda_react" {
@@ -3695,7 +3695,6 @@ resource "null_resource" "file_replacement_api_gw_cleanup" {
     command     = <<EOF
 sed -i "s,${aws_api_gateway_deployment.apideploy_ba.invoke_url},API_GATEWAY_URL,g" resources/s3/webfiles/build/static/js/main.6c4b3723.js
 sed -i "s,${aws_api_gateway_deployment.apideploy_ba.invoke_url},API_GATEWAY_URL,g" resources/s3/webfiles/build/static/js/main.6c4b3723.js.map
-sed -i 's/${aws_instance.sandbox_instance.public_ip}/EC2_IP_ADDR/g' resources/s3/shared/shared/files/.ssh/config.txt
 EOF
     interpreter = ["/bin/bash", "-c"]
   }
