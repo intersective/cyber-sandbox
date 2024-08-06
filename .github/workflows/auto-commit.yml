@@ -2,7 +2,7 @@ name: Scheduled Commit
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight UTC
+    - cron: '0 0 15 * *' # Runs 15th of each month at midnight UTC
   workflow_dispatch:  # Manual trigger
 
 jobs:
