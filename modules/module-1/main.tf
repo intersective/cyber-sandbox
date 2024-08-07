@@ -3192,7 +3192,7 @@ locals {
 
 /* Creating a S3 Bucket for webfiles files upload. */
 resource "aws_s3_bucket" "bucket_upload" {
-  bucket        = "production-blog-awsgoat-bucket-${data.aws_caller_identity.current.account_id}"
+  bucket        = "production-blog-hackicorp-bucket-${data.aws_caller_identity.current.account_id}"
   force_destroy = true
   tags = {
     Name        = "Production bucket"
