@@ -3738,7 +3738,7 @@ resource "aws_cloudfront_distribution" "api_distribution" {
     }
 
     # Include the stage in the path
-    origin_path = "/prod"
+    origin_path = "/prod/react"
   }
 
   enabled             = true
