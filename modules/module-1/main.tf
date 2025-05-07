@@ -3709,6 +3709,7 @@ EOF
 
 # cdn and route53
 data "aws_acm_certificate" "hackicorp" {
+  domain = "*.cybersec.practeraco.de"
   tags = {
     ENV        = "pcloud"
     STACK_NAME = "cybersecurity"
